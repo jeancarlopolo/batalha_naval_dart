@@ -1,13 +1,13 @@
 ///Elemento de uma lista
-class Node<T> {
+class Elemento<T> {
   T item;
-  Node<T>? next;
-  Node(this.item, [this.next]);
+  Elemento<T>? next;
+  Elemento(this.item, [this.next]);
 }
 
 ///Lista ligada simples
 class ListaLigada<E> {
-  Node<E>? inicio;
+  Elemento<E>? inicio;
   int? capacidade;
 
   ListaLigada([this.capacidade]);
@@ -18,7 +18,7 @@ class ListaLigada<E> {
 
   int get length {
     int i = 0;
-    Node<E>? aux = inicio;
+    Elemento<E>? aux = inicio;
     while (aux != null) {
       i++;
       aux = aux.next;
@@ -32,13 +32,13 @@ class ListaLigada<E> {
       throw Exception('Lista cheia');
     }
     if (isEmpty) {
-      inicio = Node(item);
+      inicio = Elemento(item);
     } else {
-      Node<E>? aux = inicio;
+      Elemento<E>? aux = inicio;
       while (aux!.next != null) {
         aux = aux.next;
       }
-      aux.next = Node<E>(item);
+      aux.next = Elemento<E>(item);
     }
     capacidade = capacidade != null ? capacidade! - 1 : null;
   }
@@ -51,7 +51,7 @@ class ListaLigada<E> {
     if (inicio!.item == item) {
       inicio = inicio!.next;
     } else {
-      Node<E>? aux = inicio;
+      Elemento<E>? aux = inicio;
       while (aux!.next != null && aux.next!.item != item) {
         aux = aux.next;
       }
@@ -83,16 +83,16 @@ class ListaLigada<E> {
       throw Exception('Lista vazia');
     }
     if (inicio!.item == before) {
-      inicio = Node(item, inicio);
+      inicio = Elemento(item, inicio);
     } else {
-      Node<E>? aux = inicio;
+      Elemento<E>? aux = inicio;
       while (aux!.next != null && aux.next!.item != before) {
         aux = aux.next;
       }
       if (aux.next == null) {
         throw Exception('Item não encontrado');
       }
-      aux.next = Node(item, aux.next);
+      aux.next = Elemento(item, aux.next);
     }
     capacidade = capacidade != null ? capacidade! - 1 : null;
   }
@@ -105,14 +105,14 @@ class ListaLigada<E> {
     if (isEmpty) {
       throw Exception('Lista vazia');
     }
-    Node<E>? aux = inicio;
+    Elemento<E>? aux = inicio;
     while (aux != null && aux.item != after) {
       aux = aux.next;
     }
     if (aux == null) {
       throw Exception('Item não encontrado');
     }
-    aux.next = Node(item, aux.next);
+    aux.next = Elemento(item, aux.next);
     capacidade = capacidade != null ? capacidade! - 1 : null;
   }
 }

@@ -22,4 +22,10 @@ abstract class Barco {
 
   /// Retorna a área do barco
   double area();
+
+  /// Retorna a quantidade de pontos recebidos ao destruir o barco
+  double pontos();
+
+  /// Retorna a quantidade de pontos recebidos ao desativar o barco
+  double pontosDesativar();
 }

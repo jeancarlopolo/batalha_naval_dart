@@ -9,12 +9,22 @@ class Circulo extends Barco {
   String? corBorda;
   String? corPreenchimento;
 
-  Circulo(int? id, int? idCapitao, int? hp, double? protecao, this.x, this.y,
+  Circulo(int? id, this.x, this.y,
       this.raio, this.corBorda, this.corPreenchimento)
-      : super(id, idCapitao, hp, protecao);
+      : super(id, -1, 2, 60);
 
   @override
   double area() {
     return 3.14 * raio! * raio!;
+  }
+
+  @override
+  double pontos() {
+    return 75 / (area() / 5);
+  }
+
+  @override
+  double pontosDesativar() {
+    return 75;
   }
 }

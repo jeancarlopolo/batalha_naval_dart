@@ -8,9 +8,7 @@ class Linha extends Barco {
   double? y2;
   String? cor;
 
-  Linha(int? id, int? idCapitao, int? hp, double? protecao, this.x, this.y,
-      this.x2, this.y2, this.cor)
-      : super(id, idCapitao, hp, protecao);
+  Linha(int? id, this.x, this.y, this.x2, this.y2, this.cor) : super(id, -1, 1, 50);
 
   double get _comprimento {
     return (x2! - x!).abs() + (y2! - y!).abs();
@@ -19,5 +17,15 @@ class Linha extends Barco {
   @override
   double area() {
     return _comprimento;
+  }
+
+  @override
+  double pontos() {
+    return 50;
+  }
+
+  @override
+  double pontosDesativar() {
+    return 50;
   }
 }
