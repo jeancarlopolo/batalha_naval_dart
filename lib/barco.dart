@@ -19,4 +19,7 @@ abstract class Barco {
   void reduzirProt(int dano) {
     protecao = protecao! - dano;
   }
+
+  /// Retorna a área do barco
+  double area();
 }
