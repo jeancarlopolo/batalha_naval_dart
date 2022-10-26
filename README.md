@@ -7,27 +7,27 @@
 
 ## O que falta fazer 
 
-- [ ] Estruturas dos polígonos
+- [x] Estruturas dos polígonos
   - [x] Retângulo
   - [x] Círculo
   - [x] Texto
   - [x] Linha
   - [x] Barco
-  - [ ] **Mina Flutuante**
-- [ ] Manipulação de arquivos
-  - [ ] Leitura do .geo
-  - [ ] Leitura do .qry
-  - [ ] Criação do .txt
+  - [x] **Mina Flutuante**
+- [x] Manipulação de arquivos
+  - [x] Leitura do .geo
+  - [x] Leitura do .qry
+  - [x] Criação do .txt
   - [x] Criação do .svg
-- [ ] Funções do .qry
-  - [ ] na (Nível de Agressividade)
-  - [ ] tp (Torpedo)
-  - [ ] tr (Torpedo Replicante)
-  - [ ] be (Bomba de Radiação)
-  - [ ] se (Selecionar barco)
-  - [ ] sec (Selecionar barco e definir como nau-capitã)
-  - [ ] movimentacao (Mover horizontalmente)
-  - [ ] mvv (Mover verticalmente)
-- [ ] Execução do código
+- [x] Funções do .qry
+  - [x] na (Nível de Agressividade)
+  - [x] tp (Torpedo)
+  - [x] tr (Torpedo Replicante)
+  - [x] be (Bomba de Radiação)
+  - [x] se (Selecionar barco)
+  - [x] sec (Selecionar barco e definir como nau-capitã)
+  - [x] movimentacao (Mover horizontalmente)
+  - [x] mvv (Mover verticalmente)
+- [x] Execução do código
   
 ***
