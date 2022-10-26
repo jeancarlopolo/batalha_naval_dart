@@ -12,6 +12,7 @@ void main(List<String> args) {
   var dir = '';
   var path = '';
   var lista = ListaLigada();
+  var listaminas = ListaLigada();
   for (var i = 0; i < args.length; i++) {
     switch (args[i]) {
       case '-f':
@@ -37,15 +38,15 @@ void main(List<String> args) {
     return;
   }
   if (path != '') {
-    lista = lerArquivoGeo('$path/$geo');
+    lista = lerArquivoGeo('$path/$geo', listaminas);
   } else {
-    lista = lerArquivoGeo(geo);
+    lista = lerArquivoGeo(geo, listaminas);
   }
   var arquivo = svgfuncoes.criaSvg('$geo$qry.svg', path: dir);
   if (qry != '') {
-    lerArquivoQry('$path/$qry', lista);
+    lerArquivoQry('$path/$qry', lista, arquivo, listaminas);
   } else {
-    lerArquivoQry(qry, lista);
+    lerArquivoQry(qry, lista, arquivo, listaminas);
   }
   svgfuncoes.desenhar(lista, arquivo);
   svgfuncoes.finalizaSvg(arquivo);

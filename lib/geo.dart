@@ -5,11 +5,12 @@ import 'dart:io';
 import 'circulo.dart';
 import 'linha.dart';
 import 'lista.dart';
+import 'mina.dart';
 import 'retangulo.dart';
 import 'texto.dart';
 
 ///Lê um arquivo GEO e retorna uma lista encadeada com os elementos
-ListaLigada lerArquivoGeo(String nome) {
+ListaLigada lerArquivoGeo(String nome, ListaLigada listaminas) {
   final file = File(nome);
   final lista = ListaLigada();
   final lines = file.readAsLinesSync();
@@ -45,15 +46,28 @@ ListaLigada lerArquivoGeo(String nome) {
             posic = 'end';
             break;
         }
-        lista.insert(Texto(
-          int.parse(split[1]),
-          double.parse(split[2]),
-          double.parse(split[3]),
-          split[4],
-          split[5],
-          split[6],
-          posic,
-        ));
+        if (split[4] == '#') {
+          listaminas.insert(Mina(
+            int.parse(split[1]),
+            double.parse(split[2]),
+            double.parse(split[3]),
+            split[4],
+            split[5],
+            split[6],
+            posic,
+          ));
+          break;
+        } else {
+          lista.insert(Texto(
+            int.parse(split[1]),
+            double.parse(split[2]),
+            double.parse(split[3]),
+            split[4],
+            split[5],
+            split[6],
+            posic,
+          ));
+        }
         break;
       case 'l':
         lista.insert(Linha(

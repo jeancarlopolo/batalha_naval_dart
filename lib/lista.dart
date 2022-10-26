@@ -115,5 +115,35 @@ class ListaLigada<E> {
     aux.next = Elemento(item, aux.next);
     capacidade = capacidade != null ? capacidade! - 1 : null;
   }
+
+  ///Retorna o elemento anterior ao item
+  E? previous(E item) {
+    if (isEmpty) {
+      throw Exception('Lista vazia');
+    }
+    if (inicio!.item == item) {
+      throw Exception('Item não encontrado');
+    }
+    Elemento<E>? aux = inicio;
+    while (aux!.next != null && aux.next!.item != item) {
+      aux = aux.next;
+    }
+    if (aux.next == null) {
+      throw Exception('Item não encontrado');
+    }
+    return aux.item;
+  }
+
+  ///Retorna o fim da lista
+  E? last() {
+    if (isEmpty) {
+      throw Exception('Lista vazia');
+    }
+    Elemento<E>? aux = inicio;
+    while (aux!.next != null) {
+      aux = aux.next;
+    }
+    return aux.item;
+  }
 }
 
