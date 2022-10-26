@@ -8,9 +8,10 @@ import 'lista.dart';
 import 'retangulo.dart';
 import 'texto.dart';
 
+
 ///Cria um SVG
-File criaSvg(String nome) {
-  final file = File(nome);
+File criaSvg(String nome, {String path = ''}) {
+  final file = File('$path/$nome');
   file.writeAsStringSync(
       '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1">\n\r');
   return file;
