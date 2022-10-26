@@ -10,9 +10,10 @@ abstract class Barco {
 
   Barco(this.id, this.idCapitao, this.hp, this.protecao);
 
-  /// Causa dano ao barco
-  void causarDano(int dano) {
+  /// Causa dano ao barco. Retorna true se o barco foi destruído e false caso contrário.
+  bool causarDano(int dano) {
     hp = hp! - dano;
+    return hp! <= 0;
   }
 
   /// Causa dano à proteção do barco

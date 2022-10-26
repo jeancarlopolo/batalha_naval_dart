@@ -9,8 +9,8 @@ class Circulo extends Barco {
   String? corBorda;
   String? corPreenchimento;
 
-  Circulo(int? id, this.x, this.y,
-      this.raio, this.corBorda, this.corPreenchimento)
+  Circulo(
+      int? id, this.x, this.y, this.raio, this.corBorda, this.corPreenchimento)
       : super(id, -1, 2, 60);
 
   @override
