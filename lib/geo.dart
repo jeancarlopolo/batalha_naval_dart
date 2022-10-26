@@ -38,7 +38,7 @@ ListaLigada lerArquivoGeo(String nome, ListaLigada listaminas) {
         break;
       case 't':
         var posic = 'middle';
-        switch (split[7]) {
+        switch (split[6]) {
           case 'i':
             posic = 'start';
             break;
@@ -46,14 +46,14 @@ ListaLigada lerArquivoGeo(String nome, ListaLigada listaminas) {
             posic = 'end';
             break;
         }
-        if (split[4] == '#') {
+        if (split[6] == '#') {
           listaminas.insert(Mina(
             int.parse(split[1]),
             double.parse(split[2]),
             double.parse(split[3]),
             split[4],
             split[5],
-            split[6],
+            split[7],
             posic,
           ));
           break;
@@ -62,9 +62,9 @@ ListaLigada lerArquivoGeo(String nome, ListaLigada listaminas) {
             int.parse(split[1]),
             double.parse(split[2]),
             double.parse(split[3]),
+            split[7],
             split[4],
             split[5],
-            split[6],
             posic,
           ));
         }

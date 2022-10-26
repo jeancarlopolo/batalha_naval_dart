@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:batalha_naval/lista.dart';
 import 'package:batalha_naval/qry.dart';
 import 'package:batalha_naval/svg.dart' as svgfuncoes;
@@ -34,22 +36,36 @@ void main(List<String> args) {
     print('Arquivo .geo não especificado');
     return;
   }
-  if (dir == '') {
-    print('Diretório de saída não especificado');
-    return;
-  }
   if (path != '') {
     lista = lerArquivoGeo('$path/$geo', listaminas);
   } else {
     lista = lerArquivoGeo(geo, listaminas);
   }
-  var arquivo = svgfuncoes.criaSvg('$geo$qry.svg', path: dir);
-  if (qry != '') {
-    lerArquivoQry('$path/$qry', lista, arquivo, listaminas);
+  var arquivotemp = File('${dir}temporario.svg');
+  arquivotemp.writeAsStringSync('');
+  if (path != '') {
+    if (qry != '') {
+      lerArquivoQry('$path/$qry', lista, arquivotemp, listaminas);
+    }
   } else {
-    lerArquivoQry(qry, lista, arquivo, listaminas);
+    if (qry != '') {
+      lerArquivoQry(qry, lista, arquivotemp, listaminas);
+    }
   }
+  var arquivo =
+      File('$dir${geo.replaceFirst('.', '')}${qry.replaceFirst('.', '')}.svg');
+  arquivo.writeAsStringSync('');
+  arquivo.writeAsStringSync(
+      '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1">\n\n',
+      mode: FileMode.append);
   svgfuncoes.desenhar(lista, arquivo);
-  svgfuncoes.finalizaSvg(arquivo);
-  print('Arquivo $geo$qry.svg gerado com sucesso!');
+  if (arquivotemp.existsSync()) {
+    final lines = arquivotemp.readAsLinesSync();
+    for (var line in lines) {
+      arquivo.writeAsStringSync('\n$line', mode: FileMode.append);
+    }
+    arquivotemp.deleteSync();
+  }
+  arquivo.writeAsStringSync('</svg>', mode: FileMode.append);
+  print('Arquivo $arquivo gerado com sucesso!');
 }

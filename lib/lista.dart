@@ -117,25 +117,25 @@ class ListaLigada<E> {
   }
 
   ///Retorna o elemento anterior ao item
-  E? previous(E item) {
+  Elemento<E>? previous(E item) {
     if (isEmpty) {
-      throw Exception('Lista vazia');
+      return null;
     }
     if (inicio!.item == item) {
-      throw Exception('Item não encontrado');
+      return null;
     }
     Elemento<E>? aux = inicio;
     while (aux!.next != null && aux.next!.item != item) {
       aux = aux.next;
     }
     if (aux.next == null) {
-      throw Exception('Item não encontrado');
+      return null;
     }
-    return aux.item;
+    return aux;
   }
 
   ///Retorna o fim da lista
-  E? last() {
+  Elemento<E>? last() {
     if (isEmpty) {
       throw Exception('Lista vazia');
     }
@@ -143,6 +143,6 @@ class ListaLigada<E> {
     while (aux!.next != null) {
       aux = aux.next;
     }
-    return aux.item;
+    return aux;
   }
 }

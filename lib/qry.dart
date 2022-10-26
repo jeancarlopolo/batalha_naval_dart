@@ -100,16 +100,16 @@ double ataqueTorpedo(
   }
   if (barcosAtingidos == 0) {
     svg.writeAsStringSync(
-        '<text x="$x" y="$y" fill="gray" stroke="gray" text-anchor="middle">*</text>\r',
+        '<text x="$x" y="$y" fill="gray" stroke="gray" text-anchor="middle">*</text>\n',
         mode: FileMode.append);
     txt.writeAsStringSync('ÁGUA! Nenhum barco foi atingido.\n\n',
         mode: FileMode.append);
   } else {
     svg.writeAsStringSync(
-        '<text x="$x" y="$y" fill="red" stroke="red" text-anchor="middle">*</text>\r',
+        '<text x="$x" y="$y" fill="red" stroke="red" text-anchor="middle">*</text>\n',
         mode: FileMode.append);
     svg.writeAsStringSync(
-        '<text x="${x + 10}" y="${y + 10}" fill="red" stroke="red" text-anchor="middle">$barcosAtingidos</text>\r',
+        '<text x="${x + 10}" y="${y + 10}" fill="red" stroke="red" text-anchor="middle">$barcosAtingidos</text>\n',
         mode: FileMode.append);
   }
   return pontuacao;
@@ -141,78 +141,78 @@ void ataqueTorpedoReplicante(ListaLigada lista, double x, double y, double dx,
         txt.writeAsStringSync(
             'O torpedo replicante atingiu o círculo ${circulo.id} e o replicou.\nDados do círculo: x=${circulo.x}\ny=${circulo.y}\nraio=${circulo.raio}\ncor de preenchimento=${circulo.corPreenchimento}\ncor da borda=${circulo.corBorda}\nHP=${circulo.hp}\n\n',
             mode: FileMode.append);
-      } else if (navio.item is Retangulo) {
-        var retangulo = navio.item as Retangulo;
-        if (x >= retangulo.x! &&
-            x <= retangulo.x! + retangulo.largura! &&
-            y >= retangulo.y! &&
-            y <= retangulo.y! + retangulo.altura!) {
-          contador++;
-          var retanguloClone = Retangulo(
-            id + contador,
-            retangulo.x! + dx,
-            retangulo.y! + dy,
-            retangulo.largura,
-            retangulo.altura,
-            retangulo.corPreenchimento,
-            retangulo.corBorda,
-          );
-          lista.insert(retanguloClone);
-          retanguloClone.hp = retangulo.hp;
-          txt.writeAsStringSync(
-              'O torpedo replicante atingiu o retângulo ${retangulo.id} e o replicou.\nDados do retângulo: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\n\n',
-              mode: FileMode.append);
-        }
-      } else if (navio.item is Linha) {
-        var linha = navio.item as Linha;
-        if (((x <= linha.x! && x >= linha.x2!) ||
-                (x >= linha.x! && x <= linha.x2!)) &&
-            ((y >= linha.y! && y <= linha.y2!) ||
-                (y <= linha.y! && y >= linha.y2!))) {
-          contador++;
-          var linhaClone = Linha(
-            id + contador,
-            linha.x! + dx,
-            linha.y! + dy,
-            linha.x2,
-            linha.y2,
-            linha.cor,
-          );
-          lista.insert(linhaClone);
-          linhaClone.hp = linha.hp;
-          txt.writeAsStringSync(
-              'O torpedo replicante atingiu a linha ${linha.id} e a replicou.\nDados da linha: x=${linha.x}\ny=${linha.y}\nx2=${linha.x2}\ny2=${linha.y2}\ncor=${linha.cor}\nHP=${linha.hp}\n\n',
-              mode: FileMode.append);
-        }
-      } else if (navio.item is Texto) {
-        var texto = navio.item as Texto;
-        if (x >= texto.x! &&
-            x <= texto.x! + texto.conteudo!.length * 10 &&
-            y >= texto.y! - 10 &&
-            y <= texto.y!) {
-          contador++;
-          var textoClone = Texto(
-            id + contador,
-            texto.x! + dx,
-            texto.y! + dy,
-            texto.conteudo,
-            texto.corPreenchimento,
-            texto.corBorda,
-            texto.posicao,
-          );
-          lista.insert(textoClone);
-          textoClone.hp = texto.hp;
-          txt.writeAsStringSync(
-              'O torpedo replicante atingiu o texto ${texto.id} e o replicou.\nDados do texto: x=${texto.x}\ny=${texto.y}\ntexto=${texto.conteudo}\ncor da borda=${texto.corBorda}\ncor do preenchimento=${texto.corPreenchimento}\nHP=${texto.hp}\n\n',
-              mode: FileMode.append);
-        }
       }
-      navio = navio.next;
+    } else if (navio.item is Retangulo) {
+      var retangulo = navio.item as Retangulo;
+      if (x >= retangulo.x! &&
+          x <= retangulo.x! + retangulo.largura! &&
+          y >= retangulo.y! &&
+          y <= retangulo.y! + retangulo.altura!) {
+        contador++;
+        var retanguloClone = Retangulo(
+          id + contador,
+          retangulo.x! + dx,
+          retangulo.y! + dy,
+          retangulo.largura,
+          retangulo.altura,
+          retangulo.corPreenchimento,
+          retangulo.corBorda,
+        );
+        lista.insert(retanguloClone);
+        retanguloClone.hp = retangulo.hp;
+        txt.writeAsStringSync(
+            'O torpedo replicante atingiu o retângulo ${retangulo.id} e o replicou.\nDados do retângulo: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\n\n',
+            mode: FileMode.append);
+      }
+    } else if (navio.item is Linha) {
+      var linha = navio.item as Linha;
+      if (((x <= linha.x! && x >= linha.x2!) ||
+              (x >= linha.x! && x <= linha.x2!)) &&
+          ((y >= linha.y! && y <= linha.y2!) ||
+              (y <= linha.y! && y >= linha.y2!))) {
+        contador++;
+        var linhaClone = Linha(
+          id + contador,
+          linha.x! + dx,
+          linha.y! + dy,
+          linha.x2,
+          linha.y2,
+          linha.cor,
+        );
+        lista.insert(linhaClone);
+        linhaClone.hp = linha.hp;
+        txt.writeAsStringSync(
+            'O torpedo replicante atingiu a linha ${linha.id} e a replicou.\nDados da linha: x=${linha.x}\ny=${linha.y}\nx2=${linha.x2}\ny2=${linha.y2}\ncor=${linha.cor}\nHP=${linha.hp}\n\n',
+            mode: FileMode.append);
+      }
+    } else if (navio.item is Texto) {
+      var texto = navio.item as Texto;
+      if (x >= texto.x! &&
+          x <= texto.x! + texto.conteudo!.length * 10 &&
+          y >= texto.y! - 10 &&
+          y <= texto.y!) {
+        contador++;
+        var textoClone = Texto(
+          id + contador,
+          texto.x! + dx,
+          texto.y! + dy,
+          texto.conteudo,
+          texto.corPreenchimento,
+          texto.corBorda,
+          texto.posicao,
+        );
+        lista.insert(textoClone);
+        textoClone.hp = texto.hp;
+        txt.writeAsStringSync(
+            'O torpedo replicante atingiu o texto ${texto.id} e o replicou.\nDados do texto: x=${texto.x}\ny=${texto.y}\ntexto=${texto.conteudo}\ncor da borda=${texto.corBorda}\ncor do preenchimento=${texto.corPreenchimento}\nHP=${texto.hp}\n\n',
+            mode: FileMode.append);
+      }
     }
-    svg.writeAsStringSync(
-        '<text x="$x" y="$y" fill="red" stroke="red" text-anchor="middle">@</text>\r',
-        mode: FileMode.append);
+    navio = navio.next;
   }
+  svg.writeAsStringSync(
+      '<text x="$x" y="$y" fill="red" stroke="red" text-anchor="middle">@</text>\n',
+      mode: FileMode.append);
 }
 
 ///Bomba de radiação atinge o local especificado. Retorna a pontuação recebida
@@ -221,13 +221,14 @@ double bombaRadiacao(ListaLigada lista, double x, double y, double r, double na,
   var pontos = 0.0;
   var navio = lista.inicio;
 
-  double calculoReducao(double area, double raio, double na) {
+  double calculoReducao(double area, double raio, double nivel) {
     double reducao = 0.0;
     raio = raio * raio * pi;
-    reducao = (area * na) / raio;
+    reducao = (area * nivel) / raio;
     return reducao;
   }
 
+  var na = 1.0;
   while (navio != null) {
     if (navio.item is Circulo) {
       var circulo = navio.item as Circulo;
@@ -238,7 +239,7 @@ double bombaRadiacao(ListaLigada lista, double x, double y, double r, double na,
         circulo.protecao =
             circulo.protecao! - calculoReducao(circulo.area(), r, na);
         svg.writeAsStringSync(
-            '<circle cx="${circulo.x}" cy="${circulo.y}" r="2" fill="red" stroke="red" stroke-width="1" />\r',
+            '<circle cx="${circulo.x}" cy="${circulo.y}" r="2" fill="red" stroke="red" stroke-width="1" />\n',
             mode: FileMode.append);
         if (circulo.protecao! <= 0) {
           pontos += circulo.pontosDesativar();
@@ -254,31 +255,36 @@ double bombaRadiacao(ListaLigada lista, double x, double y, double r, double na,
       }
     } else if (navio.item is Retangulo) {
       var retangulo = navio.item as Retangulo;
-      if (sqrt(pow(x - retangulo.x!, 2) + pow(y - retangulo.y!, 2)) < r &&
-          sqrt(pow(x - retangulo.x! - retangulo.largura!, 2) +
-                  pow(y - retangulo.y!, 2)) <
-              r &&
-          sqrt(pow(x - retangulo.x!, 2) +
-                  pow(y - retangulo.y! - retangulo.altura!, 2)) <
-              r &&
-          sqrt(pow(x - retangulo.x! - retangulo.largura!, 2) +
-                  pow(y - retangulo.y! - retangulo.altura!, 2)) <
-              r) {
-        retangulo.protecao =
-            retangulo.protecao! - calculoReducao(retangulo.area(), r, na);
-        svg.writeAsStringSync(
-            '<circle cx="$x" cy="$y" r="2" fill="red" stroke="red" stroke-width="1" />\r',
-            mode: FileMode.append);
-        if (retangulo.protecao! <= 0) {
-          pontos += retangulo.pontosDesativar();
-          txt.writeAsStringSync(
-              'A bomba de radiação atingiu o retângulo ${retangulo.id} e o desativou.\nDados do retângulo: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
+      if (x + r >= retangulo.x! &&
+          x - r <= retangulo.x! + retangulo.largura! &&
+          y + r >= retangulo.y! &&
+          y - r <= retangulo.y! + retangulo.altura!) {
+        if (sqrt(pow(x - retangulo.x!, 2) + pow(y - retangulo.y!, 2)) < r &&
+            sqrt(pow(x - retangulo.x! - retangulo.largura!, 2) +
+                    pow(y - retangulo.y!, 2)) <
+                r &&
+            sqrt(pow(x - retangulo.x!, 2) +
+                    pow(y - retangulo.y! - retangulo.altura!, 2)) <
+                r &&
+            sqrt(pow(x - retangulo.x! - retangulo.largura!, 2) +
+                    pow(y - retangulo.y! - retangulo.altura!, 2)) <
+                r) {
+          retangulo.protecao =
+              retangulo.protecao! - calculoReducao(retangulo.area(), r, na);
+          svg.writeAsStringSync(
+              '<circle cx="${retangulo.x}" cy="${retangulo.y}" r="2" fill="red" stroke="red" stroke-width="1" />\n',
               mode: FileMode.append);
-          lista.remove(retangulo);
-        } else {
-          txt.writeAsStringSync(
-              'A bomba de radiação atingiu o retângulo ${retangulo.id}.\nDados do retângulo: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
-              mode: FileMode.append);
+          if (retangulo.protecao! <= 0) {
+            pontos += retangulo.pontosDesativar();
+            txt.writeAsStringSync(
+                'A bomba de radiação atingiu o retângulo ${retangulo.id} e o desativou.\nDados do retângulo: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(retangulo);
+          } else {
+            txt.writeAsStringSync(
+                'A bomba de radiação atingiu o retângulo ${retangulo.id}.\nDados do retângulo: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
+                mode: FileMode.append);
+          }
         }
       }
     } else if (navio.item is Linha) {
@@ -287,7 +293,7 @@ double bombaRadiacao(ListaLigada lista, double x, double y, double r, double na,
           sqrt(pow(linha.x2! - x, 2) + pow(linha.y2! - y, 2)) < r) {
         linha.protecao = linha.protecao! - calculoReducao(linha.area(), r, na);
         svg.writeAsStringSync(
-            '<circle cx="$x" cy="$y" r="2" fill="red" stroke="red" stroke-width="1" />\r',
+            '<circle cx="${linha.x}" cy="${linha.y}" r="2" fill="red" stroke="red" stroke-width="1" />\n',
             mode: FileMode.append);
         if (linha.protecao! <= 0) {
           pontos += linha.pontosDesativar();
@@ -306,7 +312,7 @@ double bombaRadiacao(ListaLigada lista, double x, double y, double r, double na,
       if (sqrt(pow(texto.x! - x, 2) + pow(texto.y! - y, 2)) < r) {
         texto.protecao = texto.protecao! - calculoReducao(texto.area(), r, na);
         svg.writeAsStringSync(
-            '<circle cx="$x" cy="$y" r="2" fill="red" stroke="red" stroke-width="1" />\r',
+            '<circle cx="${texto.x}" cy="${texto.y}" r="2" fill="red" stroke="red" stroke-width="1" />\n',
             mode: FileMode.append);
         if (texto.protecao! <= 0) {
           pontos += texto.pontosDesativar();
@@ -323,6 +329,10 @@ double bombaRadiacao(ListaLigada lista, double x, double y, double r, double na,
     }
     navio = navio.next;
   }
+  //círculo vermelho pontilhado no centro da bomba sem preenchimento
+  svg.writeAsStringSync(
+      '<circle cx="$x" cy="$y" r="$r" fill="none" stroke="red" stroke-width="1" stroke-dasharray="2,2" />\n',
+      mode: FileMode.append);
   return pontos;
 }
 
@@ -330,259 +340,262 @@ double bombaRadiacao(ListaLigada lista, double x, double y, double r, double na,
 bool passouMina(Barco b, double dx, double dy, ListaLigada lista,
     ListaLigada listaminas, ListaLigada listaSelec, File svg, File txt) {
   var navio = b;
-  if (navio is Circulo) {
-    var circulo = navio;
-    var mina = listaminas.inicio as Mina;
-    if (dx == 0) {
-      if (dy <= 0) {
-        if (circulo.y! + dy - circulo.raio! <= mina.y! &&
-            mina.y! <= circulo.y! + circulo.raio! &&
-            circulo.x! - circulo.raio! <= mina.x! &&
-            circulo.x! + circulo.raio! >= mina.x!) {
-          txt.writeAsStringSync(
-              'O círculo ${circulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${circulo.x}\ny=${circulo.y}\nraio=${circulo.raio}\ncor de preenchimento=${circulo.corPreenchimento}\ncor da borda=${circulo.corBorda}\nHP=${circulo.hp}\nNível de Proteção=${circulo.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(circulo);
-          listaSelec.remove(circulo);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${circulo.x}" y="${circulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
+  var mina = listaminas.inicio as Mina?;
+  while (mina != null) {
+    if (navio is Circulo) {
+      var circulo = navio;
+
+      if (dx == 0) {
+        if (dy <= 0) {
+          if (circulo.y! + dy - circulo.raio! <= mina.y! &&
+              mina.y! <= circulo.y! + circulo.raio! &&
+              circulo.x! - circulo.raio! <= mina.x! &&
+              circulo.x! + circulo.raio! >= mina.x!) {
+            txt.writeAsStringSync(
+                'O círculo ${circulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${circulo.x}\ny=${circulo.y}\nraio=${circulo.raio}\ncor de preenchimento=${circulo.corPreenchimento}\ncor da borda=${circulo.corBorda}\nHP=${circulo.hp}\nNível de Proteção=${circulo.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(circulo);
+            listaSelec.remove(circulo);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${circulo.x}" y="${circulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
+        } else {
+          if (circulo.y! + dy + circulo.raio! >= mina.y! &&
+              mina.y! >= circulo.y! - circulo.raio! &&
+              circulo.x! - circulo.raio! <= mina.x! &&
+              circulo.x! + circulo.raio! >= mina.x!) {
+            txt.writeAsStringSync(
+                'O círculo ${circulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${circulo.x}\ny=${circulo.y}\nraio=${circulo.raio}\ncor de preenchimento=${circulo.corPreenchimento}\ncor da borda=${circulo.corBorda}\nHP=${circulo.hp}\nNível de Proteção=${circulo.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(circulo);
+            listaSelec.remove(circulo);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${circulo.x}" y="${circulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
         }
       } else {
-        if (circulo.y! + dy + circulo.raio! >= mina.y! &&
-            mina.y! >= circulo.y! - circulo.raio! &&
-            circulo.x! - circulo.raio! <= mina.x! &&
-            circulo.x! + circulo.raio! >= mina.x!) {
-          txt.writeAsStringSync(
-              'O círculo ${circulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${circulo.x}\ny=${circulo.y}\nraio=${circulo.raio}\ncor de preenchimento=${circulo.corPreenchimento}\ncor da borda=${circulo.corBorda}\nHP=${circulo.hp}\nNível de Proteção=${circulo.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(circulo);
-          listaSelec.remove(circulo);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${circulo.x}" y="${circulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
+        if (dx <= 0) {
+          if (circulo.x! + dx - circulo.raio! <= mina.x! &&
+              mina.x! <= circulo.x! + circulo.raio! &&
+              circulo.y! - circulo.raio! <= mina.y! &&
+              circulo.y! + circulo.raio! >= mina.y!) {
+            txt.writeAsStringSync(
+                'O círculo ${circulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${circulo.x}\ny=${circulo.y}\nraio=${circulo.raio}\ncor de preenchimento=${circulo.corPreenchimento}\ncor da borda=${circulo.corBorda}\nHP=${circulo.hp}\nNível de Proteção=${circulo.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(circulo);
+            listaSelec.remove(circulo);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${circulo.x}" y="${circulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
+        } else {
+          if (circulo.x! + dx + circulo.raio! >= mina.x! &&
+              mina.x! >= circulo.x! - circulo.raio! &&
+              circulo.y! - circulo.raio! <= mina.y! &&
+              circulo.y! + circulo.raio! >= mina.y!) {
+            txt.writeAsStringSync(
+                'O círculo ${circulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${circulo.x}\ny=${circulo.y}\nraio=${circulo.raio}\ncor de preenchimento=${circulo.corPreenchimento}\ncor da borda=${circulo.corBorda}\nHP=${circulo.hp}\nNível de Proteção=${circulo.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(circulo);
+            listaSelec.remove(circulo);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${circulo.x}" y="${circulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
         }
       }
-    } else {
-      if (dx <= 0) {
-        if (circulo.x! + dx - circulo.raio! <= mina.x! &&
-            mina.x! <= circulo.x! + circulo.raio! &&
-            circulo.y! - circulo.raio! <= mina.y! &&
-            circulo.y! + circulo.raio! >= mina.y!) {
-          txt.writeAsStringSync(
-              'O círculo ${circulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${circulo.x}\ny=${circulo.y}\nraio=${circulo.raio}\ncor de preenchimento=${circulo.corPreenchimento}\ncor da borda=${circulo.corBorda}\nHP=${circulo.hp}\nNível de Proteção=${circulo.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(circulo);
-          listaSelec.remove(circulo);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${circulo.x}" y="${circulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
+    } else if (navio is Retangulo) {
+      var retangulo = navio;
+      
+      if (dx == 0) {
+        if (dy <= 0) {
+          if (retangulo.y! + dy - retangulo.altura! <= mina.y! &&
+              mina.y! <= retangulo.y! + retangulo.altura! &&
+              retangulo.x! - retangulo.largura! <= mina.x! &&
+              retangulo.x! + retangulo.largura! >= mina.x!) {
+            txt.writeAsStringSync(
+                'O retângulo ${retangulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(retangulo);
+            listaSelec.remove(retangulo);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${retangulo.x}" y="${retangulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
+        } else {
+          if (retangulo.y! + dy + retangulo.altura! >= mina.y! &&
+              mina.y! >= retangulo.y! - retangulo.altura! &&
+              retangulo.x! - retangulo.largura! <= mina.x! &&
+              retangulo.x! + retangulo.largura! >= mina.x!) {
+            txt.writeAsStringSync(
+                'O retângulo ${retangulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(retangulo);
+            listaSelec.remove(retangulo);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${retangulo.x}" y="${retangulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
         }
       } else {
-        if (circulo.x! + dx + circulo.raio! >= mina.x! &&
-            mina.x! >= circulo.x! - circulo.raio! &&
-            circulo.y! - circulo.raio! <= mina.y! &&
-            circulo.y! + circulo.raio! >= mina.y!) {
-          txt.writeAsStringSync(
-              'O círculo ${circulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${circulo.x}\ny=${circulo.y}\nraio=${circulo.raio}\ncor de preenchimento=${circulo.corPreenchimento}\ncor da borda=${circulo.corBorda}\nHP=${circulo.hp}\nNível de Proteção=${circulo.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(circulo);
-          listaSelec.remove(circulo);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${circulo.x}" y="${circulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
+        if (dx <= 0) {
+          if (retangulo.x! + dx - retangulo.largura! <= mina.x! &&
+              mina.x! <= retangulo.x! + retangulo.largura! &&
+              retangulo.y! - retangulo.altura! <= mina.y! &&
+              retangulo.y! + retangulo.altura! >= mina.y!) {
+            txt.writeAsStringSync(
+                'O retângulo ${retangulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(retangulo);
+            listaSelec.remove(retangulo);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${retangulo.x}" y="${retangulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
+        } else {
+          if (retangulo.x! + dx + retangulo.largura! >= mina.x! &&
+              mina.x! >= retangulo.x! - retangulo.largura! &&
+              retangulo.y! - retangulo.altura! <= mina.y! &&
+              retangulo.y! + retangulo.altura! >= mina.y!) {
+            txt.writeAsStringSync(
+                'O retângulo ${retangulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(retangulo);
+            listaSelec.remove(retangulo);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${retangulo.x}" y="${retangulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
         }
       }
-    }
-  } else if (navio is Retangulo) {
-    var retangulo = navio;
-    var mina = listaminas.inicio as Mina;
-    if (dx == 0) {
-      if (dy <= 0) {
-        if (retangulo.y! + dy - retangulo.altura! <= mina.y! &&
-            mina.y! <= retangulo.y! + retangulo.altura! &&
-            retangulo.x! - retangulo.largura! <= mina.x! &&
-            retangulo.x! + retangulo.largura! >= mina.x!) {
-          txt.writeAsStringSync(
-              'O retângulo ${retangulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(retangulo);
-          listaSelec.remove(retangulo);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${retangulo.x}" y="${retangulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
-        }
-      } else {
-        if (retangulo.y! + dy + retangulo.altura! >= mina.y! &&
-            mina.y! >= retangulo.y! - retangulo.altura! &&
-            retangulo.x! - retangulo.largura! <= mina.x! &&
-            retangulo.x! + retangulo.largura! >= mina.x!) {
-          txt.writeAsStringSync(
-              'O retângulo ${retangulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(retangulo);
-          listaSelec.remove(retangulo);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${retangulo.x}" y="${retangulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
-        }
-      }
-    } else {
-      if (dx <= 0) {
-        if (retangulo.x! + dx - retangulo.largura! <= mina.x! &&
-            mina.x! <= retangulo.x! + retangulo.largura! &&
-            retangulo.y! - retangulo.altura! <= mina.y! &&
-            retangulo.y! + retangulo.altura! >= mina.y!) {
-          txt.writeAsStringSync(
-              'O retângulo ${retangulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(retangulo);
-          listaSelec.remove(retangulo);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${retangulo.x}" y="${retangulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
-        }
-      } else {
-        if (retangulo.x! + dx + retangulo.largura! >= mina.x! &&
-            mina.x! >= retangulo.x! - retangulo.largura! &&
-            retangulo.y! - retangulo.altura! <= mina.y! &&
-            retangulo.y! + retangulo.altura! >= mina.y!) {
-          txt.writeAsStringSync(
-              'O retângulo ${retangulo.id} passou por uma mina e foi destruído.\nDados do barco: x=${retangulo.x}\ny=${retangulo.y}\nlargura=${retangulo.largura}\naltura=${retangulo.altura}\ncor de preenchimento=${retangulo.corPreenchimento}\ncor da borda=${retangulo.corBorda}\nHP=${retangulo.hp}\nNível de Proteção=${retangulo.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(retangulo);
-          listaSelec.remove(retangulo);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${retangulo.x}" y="${retangulo.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
+    } else if (navio is Linha) {
+      var linha = navio;
+      var largura = (linha.x! - linha.x2!).abs();
+      var altura = (linha.y! - linha.y2!).abs();
+      
+      if (dx == 0) {
+        if (dy <= 0) {
+          if (linha.y! + dy - altura <= mina.y! &&
+              mina.y! <= linha.y! + altura &&
+              linha.x! - largura <= mina.x! &&
+              linha.x! + largura >= mina.x!) {
+            txt.writeAsStringSync(
+                'A linha ${linha.id} passou por uma mina e foi destruída.\nDados da linha: x=${linha.x}\ny=${linha.y}\nlargura=$largura\naltura=$altura}ncor de preenchimento=${linha.cor}\nHP=${linha.hp}\nNível de Proteção=${linha.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(linha);
+            listaSelec.remove(linha);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${linha.x}" y="${linha.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
+        } else {
+          if (linha.y! + dy + altura >= mina.y! &&
+              mina.y! >= linha.y! - altura &&
+              linha.x! - largura <= mina.x! &&
+              linha.x! + largura >= mina.x!) {
+            txt.writeAsStringSync(
+                'A linha ${linha.id} passou por uma mina e foi destruída.\nDados da linha: x=${linha.x}\ny=${linha.y}\nlargura=$largura\naltura=$altura\ncor de preenchimento=${linha.cor}\nHP=${linha.hp}\nNível de Proteção=${linha.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(linha);
+            listaSelec.remove(linha);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${linha.x}" y="${linha.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
         }
       }
-    }
-  } else if (navio is Linha) {
-    var linha = navio;
-    var largura = (linha.x! - linha.x2!).abs();
-    var altura = (linha.y! - linha.y2!).abs();
-    var mina = listaminas.inicio as Mina;
-    if (dx == 0) {
-      if (dy <= 0) {
-        if (linha.y! + dy - altura <= mina.y! &&
-            mina.y! <= linha.y! + altura &&
-            linha.x! - largura <= mina.x! &&
-            linha.x! + largura >= mina.x!) {
-          txt.writeAsStringSync(
-              'A linha ${linha.id} passou por uma mina e foi destruída.\nDados da linha: x=${linha.x}\ny=${linha.y}\nlargura=$largura\naltura=$altura}ncor de preenchimento=${linha.cor}\nHP=${linha.hp}\nNível de Proteção=${linha.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(linha);
-          listaSelec.remove(linha);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${linha.x}" y="${linha.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
+    } else if (navio is Texto) {
+      var texto = navio;
+      
+      if (dx == 0) {
+        if (dy <= 0) {
+          if (texto.y! + dy <= mina.y! &&
+              mina.y! <= texto.y! &&
+              texto.x! <= mina.x! &&
+              texto.x! >= mina.x!) {
+            txt.writeAsStringSync(
+                'O texto ${texto.id} passou por uma mina e foi destruído.\nDados do texto: x=${texto.x}\ny=${texto.y}\ncor de preenchimento=${texto.corPreenchimento}\ncor de borda=${texto.corBorda}\nHP=${texto.hp}\nNível de Proteção=${texto.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(texto);
+            listaSelec.remove(texto);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${texto.x}" y="${texto.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
+        } else {
+          if (texto.y! + dy >= mina.y! &&
+              mina.y! >= texto.y! &&
+              texto.x! <= mina.x! &&
+              texto.x! >= mina.x!) {
+            txt.writeAsStringSync(
+                'O texto ${texto.id} passou por uma mina e foi destruído.\nDados do texto: x=${texto.x}\ny=${texto.y}\ncor de preenchimento=${texto.corPreenchimento}\ncor de borda=${texto.corBorda}\nHP=${texto.hp}\nNível de Proteção=${texto.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(texto);
+            listaSelec.remove(texto);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${texto.x}" y="${texto.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
         }
-      } else {
-        if (linha.y! + dy + altura >= mina.y! &&
-            mina.y! >= linha.y! - altura &&
-            linha.x! - largura <= mina.x! &&
-            linha.x! + largura >= mina.x!) {
-          txt.writeAsStringSync(
-              'A linha ${linha.id} passou por uma mina e foi destruída.\nDados da linha: x=${linha.x}\ny=${linha.y}\nlargura=$largura\naltura=$altura\ncor de preenchimento=${linha.cor}\nHP=${linha.hp}\nNível de Proteção=${linha.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(linha);
-          listaSelec.remove(linha);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${linha.x}" y="${linha.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
-        }
-      }
-    }
-  } else if (navio is Texto) {
-    var texto = navio;
-    var mina = listaminas.inicio as Mina;
-    if (dx == 0) {
-      if (dy <= 0) {
-        if (texto.y! + dy <= mina.y! &&
-            mina.y! <= texto.y! &&
-            texto.x! <= mina.x! &&
-            texto.x! >= mina.x!) {
-          txt.writeAsStringSync(
-              'O texto ${texto.id} passou por uma mina e foi destruído.\nDados do texto: x=${texto.x}\ny=${texto.y}\ncor de preenchimento=${texto.corPreenchimento}\ncor de borda=${texto.corBorda}\nHP=${texto.hp}\nNível de Proteção=${texto.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(texto);
-          listaSelec.remove(texto);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${texto.x}" y="${texto.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
-        }
-      } else {
-        if (texto.y! + dy >= mina.y! &&
-            mina.y! >= texto.y! &&
-            texto.x! <= mina.x! &&
-            texto.x! >= mina.x!) {
-          txt.writeAsStringSync(
-              'O texto ${texto.id} passou por uma mina e foi destruído.\nDados do texto: x=${texto.x}\ny=${texto.y}\ncor de preenchimento=${texto.corPreenchimento}\ncor de borda=${texto.corBorda}\nHP=${texto.hp}\nNível de Proteção=${texto.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(texto);
-          listaSelec.remove(texto);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${texto.x}" y="${texto.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
-        }
-      }
-    } else if (dy == 0) {
-      if (dx <= 0) {
-        if (texto.x! + dx <= mina.x! &&
-            mina.x! <= texto.x! &&
-            texto.y! <= mina.y! &&
-            texto.y! >= mina.y!) {
-          txt.writeAsStringSync(
-              'O texto ${texto.id} passou por uma mina e foi destruído.\nDados do texto: x=${texto.x}\ny=${texto.y}\ncor de preenchimento=${texto.corPreenchimento}\ncor de borda=${texto.corBorda}\nHP=${texto.hp}\nNível de Proteção=${texto.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(texto);
-          listaSelec.remove(texto);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${texto.x}" y="${texto.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
-        }
-      } else {
-        if (texto.x! + dx >= mina.x! &&
-            mina.x! >= texto.x! &&
-            texto.y! <= mina.y! &&
-            texto.y! >= mina.y!) {
-          txt.writeAsStringSync(
-              'O texto ${texto.id} passou por uma mina e foi destruído.\nDados do texto: x=${texto.x}\ny=${texto.y}\ncor de preenchimento=${texto.corPreenchimento}\ncor de borda=${texto.corBorda}\nHP=${texto.hp}\nNível de Proteção=${texto.protecao}\n\n',
-              mode: FileMode.append);
-          lista.remove(texto);
-          listaSelec.remove(texto);
-          listaminas.remove(mina);
-          svg.writeAsStringSync(
-              '<text x="${texto.x}" y="${texto.y}" fill="red" font-size="5" font-family="Verdana">@</text>\r',
-              mode: FileMode.append);
-          return true;
+      } else if (dy == 0) {
+        if (dx <= 0) {
+          if (texto.x! + dx <= mina.x! &&
+              mina.x! <= texto.x! &&
+              texto.y! <= mina.y! &&
+              texto.y! >= mina.y!) {
+            txt.writeAsStringSync(
+                'O texto ${texto.id} passou por uma mina e foi destruído.\nDados do texto: x=${texto.x}\ny=${texto.y}\ncor de preenchimento=${texto.corPreenchimento}\ncor de borda=${texto.corBorda}\nHP=${texto.hp}\nNível de Proteção=${texto.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(texto);
+            listaSelec.remove(texto);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${texto.x}" y="${texto.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
+        } else {
+          if (texto.x! + dx >= mina.x! &&
+              mina.x! >= texto.x! &&
+              texto.y! <= mina.y! &&
+              texto.y! >= mina.y!) {
+            txt.writeAsStringSync(
+                'O texto ${texto.id} passou por uma mina e foi destruído.\nDados do texto: x=${texto.x}\ny=${texto.y}\ncor de preenchimento=${texto.corPreenchimento}\ncor de borda=${texto.corBorda}\nHP=${texto.hp}\nNível de Proteção=${texto.protecao}\n\n',
+                mode: FileMode.append);
+            lista.remove(texto);
+            listaSelec.remove(texto);
+            listaminas.remove(mina);
+            svg.writeAsStringSync(
+                '<text x="${texto.x}" y="${texto.y}" fill="red" font-size="5" font-family="Verdana">@</text>\n',
+                mode: FileMode.append);
+            return true;
+          }
         }
       }
     }
@@ -602,10 +615,9 @@ double moveBarco(
     File svg,
     File txt) {
   var pontos = 0.0;
-  Barco escolherBarco(ListaLigada listaSelec, int j, int k) {
+  Elemento? escolherBarco(ListaLigada listaSelec, int j, int k) {
     var elemento = listaSelec.inicio;
     Elemento? barcoCapitao;
-    Elemento? barco;
     while (elemento != null) {
       if (elemento.item.id == j) {
         barcoCapitao = elemento;
@@ -614,54 +626,55 @@ double moveBarco(
       elemento = elemento.next;
     }
     if (k > 0) {
-      barco = barcoCapitao;
       for (var i = 0; i < k; i++) {
-        barco = barco?.next ?? listaSelec.inicio;
+        barcoCapitao = barcoCapitao?.next ?? listaSelec.inicio;
       }
     } else {
-      barco = barcoCapitao;
       for (var i = 0; i > k; i--) {
-        barco = listaSelec.previous(barco) ?? listaSelec.last();
+        barcoCapitao = listaSelec.previous(barcoCapitao) ?? listaSelec.last();
       }
     }
     try {
-      return barco?.item as Barco;
+      return barcoCapitao;
     } catch (e) {
       throw Exception('Barco não encontrado');
     }
   }
 
-  Barco barco = escolherBarco(listaSelec, j, k);
-  if (!passouMina(barco, dx, dy, lista, listaminas, listaSelec, svg, txt)) {
-    if (barco is Circulo) {
-      barco.x = barco.x! + dx;
-      barco.y = barco.y! + dy;
+  var barco = escolherBarco(listaSelec, j, k);
+  if (barco == null) {
+    throw Exception('Barco não encontrado');
+  }
+  if (!passouMina(barco.item, dx, dy, lista, listaminas, listaSelec, svg, txt)) {
+    if (barco.item is Circulo) {
+      barco.item.x = barco.item.x + dx;
+      barco.item.y = barco.item.y + dy;
       txt.writeAsStringSync(
-          'O círculo ${barco.id} foi movido para a posição x=${barco.x} e y=${barco.y}.\nDados do barco: x=${barco.x}\ny=${barco.y}\ncor de preenchimento=${barco.corPreenchimento}\ncor de borda=${barco.corBorda}\nHP=${barco.hp}\nNível de Proteção=${barco.protecao}\n\n',
+          'O círculo ${barco.item.id} foi movido para a posição x=${barco.item.x} e y=${barco.item.y}.\nDados do barco: x=${barco.item.x}\ny=${barco.item.y}\ncor de preenchimento=${barco.item.corPreenchimento}\ncor de borda=${barco.item.corBorda}\nHP=${barco.item.hp}\nNível de Proteção=${barco.item.protecao}\n\n',
           mode: FileMode.append);
-    } else if (barco is Retangulo) {
-      barco.x = barco.x! + dx;
-      barco.y = barco.y! + dy;
+    } else if (barco.item is Retangulo) {
+      barco.item.x = barco.item.x! + dx;
+      barco.item.y = barco.item.y! + dy;
       txt.writeAsStringSync(
-          'O retângulo ${barco.id} foi movido para a posição x=${barco.x} e y=${barco.y}.\nDados do barco: x=${barco.x}\ny=${barco.y}\ncor de preenchimento=${barco.corPreenchimento}\ncor de borda=${barco.corBorda}\nHP=${barco.hp}\nNível de Proteção=${barco.protecao}\n\n',
+          'O retângulo ${barco.item.id} foi movido para a posição x=${barco.item.x} e y=${barco.item.y}.\nDados do barco: x=${barco.item.x}\ny=${barco.item.y}\ncor de preenchimento=${barco.item.corPreenchimento}\ncor de borda=${barco.item.corBorda}\nHP=${barco.item.hp}\nNível de Proteção=${barco.item.protecao}\n\n',
           mode: FileMode.append);
-    } else if (barco is Linha) {
-      barco.x = barco.x! + dx;
-      barco.y = barco.y! + dy;
-      barco.x2 = barco.x2! + dx;
-      barco.y2 = barco.y2! + dy;
+    } else if (barco.item is Linha) {
+      barco.item.x = barco.item.x! + dx;
+      barco.item.y = barco.item.y! + dy;
+      barco.item.x2 = barco.item.x2! + dx;
+      barco.item.y2 = barco.item.y2! + dy;
       txt.writeAsStringSync(
-          'A linha ${barco.id} foi movida para a posição x=${barco.x} e y=${barco.y}.\nDados do barco: x=${barco.x}\ny=${barco.y}\ncor=${barco.cor}\nHP=${barco.hp}\nNível de Proteção=${barco.protecao}\n\n',
+          'A linha ${barco.item.id} foi movida para a posição x=${barco.item.x} e y=${barco.item.y}.\nDados do barco: x=${barco.item.x}\ny=${barco.item.y}\ncor=${barco.item.cor}\nHP=${barco.item.hp}\nNível de Proteção=${barco.item.protecao}\n\n',
           mode: FileMode.append);
-    } else if (barco is Texto) {
-      barco.x = barco.x! + dx;
-      barco.y = barco.y! + dy;
+    } else if (barco.item is Texto) {
+      barco.item.x = barco.item.x! + dx;
+      barco.item.y = barco.item.y! + dy;
       txt.writeAsStringSync(
-          'O texto ${barco.id} foi movido para a posição x=${barco.x} e y=${barco.y}.\nDados do barco: x=${barco.x}\ny=${barco.y}\ncor de preenchimento=${barco.corPreenchimento}\ncor de borda=${barco.corBorda}\nHP=${barco.hp}\nNível de Proteção=${barco.protecao}\n\n',
+          'O texto ${barco.item.id} foi movido para a posição x=${barco.item.x} e y=${barco.item.y}.\nDados do barco: x=${barco.item.x}\ny=${barco.item.y}\ncor de preenchimento=${barco.item.corPreenchimento}\ncor de borda=${barco.item.corBorda}\nHP=${barco.item.hp}\nNível de Proteção=${barco.item.protecao}\n\n',
           mode: FileMode.append);
     }
   } else {
-    pontos += barco.pontos();
+    pontos += barco.item.pontos();
   }
   return pontos;
 }
@@ -675,8 +688,10 @@ File lerArquivoQry(
   double na = 0, pontos = 0, pontosmax = 0;
   var cont = 0;
   var elemento = lista.inicio;
+  var txt = File('relatorio.txt');
+  txt.writeAsStringSync('');
   for (var linha in linhas) {
-    arquivo.writeAsStringSync('[*] $linha\n', mode: FileMode.append);
+    txt.writeAsStringSync('[*] $linha\n', mode: FileMode.append);
     var comando = linha.split(' ');
     switch (comando[0]) {
       case 'na':
@@ -684,7 +699,7 @@ File lerArquivoQry(
         break;
       case 'tp':
         pontos += ataqueTorpedo(lista, double.parse(comando[1]),
-            double.parse(comando[2]), arquivo, svg);
+            double.parse(comando[2]), txt, svg);
         break;
       case 'tr':
         ataqueTorpedoReplicante(
@@ -695,17 +710,11 @@ File lerArquivoQry(
             double.parse(comando[4]),
             int.parse(comando[5]),
             svg,
-            arquivo);
+            txt);
         break;
       case 'be':
-        pontos += bombaRadiacao(
-            lista,
-            double.parse(comando[1]),
-            double.parse(comando[2]),
-            double.parse(comando[3]),
-            na,
-            svg,
-            arquivo);
+        pontos += bombaRadiacao(lista, double.parse(comando[1]),
+            double.parse(comando[2]), double.parse(comando[3]), na, svg, txt);
         break;
       case 'mvh':
         pontos += moveBarco(
@@ -717,7 +726,7 @@ File lerArquivoQry(
             int.parse(comando[1]),
             int.parse(comando[2]),
             svg,
-            arquivo);
+            txt);
         break;
       case 'mvv':
         pontos += moveBarco(
@@ -729,14 +738,13 @@ File lerArquivoQry(
             int.parse(comando[1]),
             int.parse(comando[2]),
             svg,
-            arquivo);
+            txt);
         break;
       case 'se':
         while (elemento != null) {
           if (elemento.item is Barco) {
-            Barco barco = elemento.item;
-            if (barco.id == int.parse(comando[1])) {
-              listaSelec.insert(barco);
+            if (elemento.item.id == int.parse(comando[1])) {
+              listaSelec.insert(elemento.item);
             }
           }
           elemento = elemento.next;
@@ -745,10 +753,9 @@ File lerArquivoQry(
       case 'sec':
         while (elemento != null) {
           if (elemento.item is Barco) {
-            Barco barco = elemento.item;
-            if (barco.id == int.parse(comando[1])) {
-              listaSelec.insert(barco);
-              barco.idCapitao = int.parse(comando[2]);
+            if (elemento.item.id == int.parse(comando[1])) {
+              listaSelec.insert(elemento.item);
+              elemento.item.idCapitao = int.parse(comando[2]);
             }
           }
           elemento = elemento.next;
@@ -758,7 +765,7 @@ File lerArquivoQry(
         continue;
     }
     cont++;
-    arquivo.writeAsStringSync('\n', mode: FileMode.append);
+    txt.writeAsStringSync('\n', mode: FileMode.append);
   }
   elemento = lista.inicio;
   while (elemento != null) {
@@ -772,11 +779,11 @@ File lerArquivoQry(
     }
     elemento = elemento.next;
   }
-  arquivo.writeAsStringSync('Pontuação: $pontos\n', mode: FileMode.append);
-  arquivo.writeAsStringSync(
+  txt.writeAsStringSync('Pontuação: $pontos\n', mode: FileMode.append);
+  txt.writeAsStringSync(
       'Proporção entre a pontuação e o número de comandos: ${pontos / cont}\n',
       mode: FileMode.append);
-  arquivo.writeAsStringSync(
+  txt.writeAsStringSync(
       'Proporção entre a pontuação e a pontuação máxima: ${pontos / pontosmax}\n',
       mode: FileMode.append);
   return arquivo;
