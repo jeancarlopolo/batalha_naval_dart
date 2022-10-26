@@ -146,4 +146,3 @@ class ListaLigada<E> {
     return aux.item;
   }
 }
-

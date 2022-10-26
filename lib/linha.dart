@@ -8,7 +8,8 @@ class Linha extends Barco {
   double? y2;
   String? cor;
 
-  Linha(int? id, this.x, this.y, this.x2, this.y2, this.cor) : super(id, -1, 1, 50);
+  Linha(int? id, this.x, this.y, this.x2, this.y2, this.cor)
+      : super(id, -1, 1, 50);
 
   double get _comprimento {
     return (x2! - x!).abs() + (y2! - y!).abs();

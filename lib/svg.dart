@@ -8,7 +8,6 @@ import 'lista.dart';
 import 'retangulo.dart';
 import 'texto.dart';
 
-
 ///Cria um SVG
 File criaSvg(String nome, {String path = ''}) {
   final file = File('$path/$nome');

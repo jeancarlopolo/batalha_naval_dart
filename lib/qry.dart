@@ -773,8 +773,11 @@ File lerArquivoQry(
     elemento = elemento.next;
   }
   arquivo.writeAsStringSync('Pontuação: $pontos\n', mode: FileMode.append);
-  arquivo.writeAsStringSync('Proporção entre a pontuação e o número de comandos: ${pontos / cont}\n',
+  arquivo.writeAsStringSync(
+      'Proporção entre a pontuação e o número de comandos: ${pontos / cont}\n',
       mode: FileMode.append);
-  arquivo.writeAsStringSync('Proporção entre a pontuação e a pontuação máxima: ${pontos / pontosmax}\n', mode: FileMode.append);
+  arquivo.writeAsStringSync(
+      'Proporção entre a pontuação e a pontuação máxima: ${pontos / pontosmax}\n',
+      mode: FileMode.append);
   return arquivo;
 }

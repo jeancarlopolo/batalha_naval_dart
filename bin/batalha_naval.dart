@@ -1,4 +1,5 @@
 import 'package:batalha_naval/lista.dart';
+import 'package:batalha_naval/qry.dart';
 import 'package:batalha_naval/svg.dart' as svgfuncoes;
 import 'package:batalha_naval/geo.dart';
 
