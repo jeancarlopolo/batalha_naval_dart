@@ -1,5 +1,5 @@
 import 'package:batalha_naval/lista.dart';
-import 'package:batalha_naval/svg.dart' as svg;
+import 'package:batalha_naval/svg.dart' as svgfuncoes;
 import 'package:batalha_naval/geo.dart';
 
 void main(List<String> args) {
@@ -41,13 +41,13 @@ void main(List<String> args) {
   } else {
     lista = lerArquivoGeo(geo);
   }
-  var arquivo = svg.criaSvg('$geo$qry.svg', path: dir);
+  var arquivo = svgfuncoes.criaSvg('$geo$qry.svg', path: dir);
   if (qry != '') {
     lerArquivoQry('$path/$qry', lista);
   } else {
     lerArquivoQry(qry, lista);
   }
-  svg.desenhar(lista, arquivo);
-  svg.finalizaSvg(arquivo);
+  svgfuncoes.desenhar(lista, arquivo);
+  svgfuncoes.finalizaSvg(arquivo);
   print('Arquivo $geo$qry.svg gerado com sucesso!');
 }
