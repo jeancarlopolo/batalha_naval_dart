@@ -10,12 +10,22 @@ class Texto extends Barco {
   String? corPreenchimento;
   String? posicao;
 
-  Texto(int? id, int? idCapitao, int? hp, double? protecao, this.x, this.y,
-      this.conteudo, this.corBorda, this.corPreenchimento, this.posicao)
-      : super(id, idCapitao, hp, protecao);
+  Texto(int? id, this.x, this.y, this.conteudo, this.corBorda,
+      this.corPreenchimento, this.posicao)
+      : super(id, -1, 1, 50);
 
   @override
   double area() {
     return 0.1;
+  }
+
+  @override
+  double pontos() {
+    return 500;
+  }
+
+  @override
+  double pontosDesativar() {
+    return 30;
   }
 }

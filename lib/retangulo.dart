@@ -10,12 +10,22 @@ class Retangulo extends Barco {
   String? corBorda;
   String? corPreenchimento;
 
-  Retangulo(int? id, int? idCapitao, int? hp, double? protecao, this.x, this.y,
-      this.largura, this.altura, this.corBorda, this.corPreenchimento)
-      : super(id, idCapitao, hp, protecao);
+  Retangulo(int? id, this.x, this.y, this.largura, this.altura, this.corBorda,
+      this.corPreenchimento)
+      : super(id, -1, 3, 60);
 
   @override
   double area() {
     return largura! * altura!;
+  }
+
+  @override
+  double pontos() {
+    return 90 / (area() / 5);
+  }
+
+  @override
+  double pontosDesativar() {
+    return 90;
   }
 }
